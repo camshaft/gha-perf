@@ -1,0 +1,75 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+  schedule:
+    # run every morning at 10am Pacific Time
+    # Running this every day makes sure the dependencies are up to date
+    - cron: '0 17 * * *'
+
+jobs:
+  env:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.versions.outputs.versions }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: List services
+        id: services
+        run: |
+          cd docker
+          VERSIONS=$(docker-compose config --services | jq -ncR '[inputs | select(length>0)]')
+          echo "::set-output name=services::$VERSIONS"
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [env]
+    strategy:
+      matrix:
+        version: ${{ fromJson(needs.env.outputs.versions) }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        working-directory: docker
+        run: |
+          docker-compose build ${{ matrix.version }}
+          docker run \
+            -v `pwd`/..:/host-dir \
+            -it camshaft/gha-perf:${{ matrix.version }} \
+            cp /usr/local/bin/perf /host-dir/${{ matrix.version }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: perf-${{ matrix.version }}
+          path: perf-${{ matrix.version }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          path: builds/
+
+      - name: Generate index
+        working-directory: builds
+        run: |
+          tree -H "." -L 1 -T "Builds" --noreport --charset utf-8 -I "*.html" > index.html
+
+      - name: Deploy
+        if: github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./builds
+
+      - name: Deploy
+        uses: actions/upload-artifact@v2
+        if: github.event_name == 'pull_request'
+        with:
+          name: builds
+          path: builds

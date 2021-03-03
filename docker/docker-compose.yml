@@ -1,0 +1,133 @@
+version: '3.7'
+services:
+  '5.11':
+    build:
+      args:
+        version: '5.11'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.11
+  '5.10':
+    build:
+      args:
+        version: '5.10'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.10
+  '5.9':
+    build:
+      args:
+        version: '5.9'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.9
+  '5.8':
+    build:
+      args:
+        version: '5.8'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.8
+  '5.7':
+    build:
+      args:
+        version: '5.7'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.7
+  '5.6':
+    build:
+      args:
+        version: '5.6'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.6
+
+  # 5.5 doesn't compile correctly so just use 5.4
+  '5.5':
+    build:
+      args:
+        version: '5.4'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.5
+
+  '5.4':
+    build:
+      args:
+        version: '5.4'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.4
+  '5.3':
+    build:
+      args:
+        version: '5.3'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.3
+  '5.2':
+    build:
+      args:
+        version: '5.2'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.2
+  '5.1':
+    build:
+      args:
+        version: '5.1'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.1
+  '5.0':
+    build:
+      args:
+        version: '5.0'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.0
+  '4.20':
+    build:
+      args:
+        version: '4.20'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:4.20
+  '4.19':
+    build:
+      args:
+        version: '4.19'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:4.19
+  '4.18':
+    build:
+      args:
+        version: '4.18'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:4.18
+  '4.17':
+    build:
+      args:
+        version: '4.17'
+        ubuntu: '18.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:4.17
