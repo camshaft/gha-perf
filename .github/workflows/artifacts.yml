@@ -17,8 +17,8 @@ jobs:
       versions: ${{ steps.versions.outputs.versions }}
     steps:
       - uses: actions/checkout@v2
-      - name: List services
-        id: services
+      - name: List versions
+        id: versions
         run: |
           cd docker
           VERSIONS=$(docker-compose config --services | jq -ncR '[inputs | select(length>0)]')
