@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   set -e; \
   apt-get update; \
-  apt-get install -y build-essential wget tar flex bison libelf-dev libdwarf-dev libdw-dev libdw1 systemtap-sdt-dev libssl-dev liblzma-dev libzstd-dev libcap-dev libnuma-dev libbabeltrace-dev libunwind-dev libbfd-dev binutils-dev zlib1g-dev libiberty-dev libbabeltrace-ctf-dev libaudit-dev libbz2-dev gawk;
+  apt-get install -y build-essential wget tar flex bison libelf-dev libdwarf-dev libdw-dev libdw1 systemtap-sdt-dev libssl-dev liblzma-dev libzstd-dev libcap-dev libnuma-dev libbabeltrace-dev libunwind-dev libbfd-dev binutils-dev zlib1g-dev libiberty-dev libbabeltrace-ctf-dev libaudit-dev libbz2-dev gawk libslang2-dev;
 
 COPY --from=glibc /usr/lib64/libc.a /usr/lib/
 

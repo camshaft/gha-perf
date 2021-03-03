@@ -41,7 +41,7 @@ jobs:
           docker-compose build ${{ matrix.version }}
           docker run \
             -v `pwd`/..:/host-dir \
-            -it camshaft/gha-perf:${{ matrix.version }} \
+            camshaft/gha-perf:${{ matrix.version }} \
             cp /usr/local/bin/perf /host-dir/${{ matrix.version }}
 
       - uses: actions/upload-artifact@v2
