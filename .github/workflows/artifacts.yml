@@ -17,12 +17,14 @@ jobs:
       versions: ${{ steps.versions.outputs.versions }}
     steps:
       - uses: actions/checkout@v2
+
       - name: List versions
         id: versions
+        working-directory: docker
         run: |
-          cd docker
           VERSIONS=$(docker-compose config --services | jq -ncR '[inputs | select(length>0)]')
-          echo "::set-output name=services::$VERSIONS"
+          echo "$VERSIONS"
+          echo "::set-output name=versions::$VERSIONS"
 
   build:
     runs-on: ubuntu-latest
