@@ -35,6 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - run: mkdir -p v${{ matrix.version }}
+
       - name: Build
         working-directory: docker
         run: |
@@ -42,12 +44,12 @@ jobs:
           docker run \
             -v `pwd`/..:/host-dir \
             camshaft/gha-perf:${{ matrix.version }} \
-            cp /usr/local/bin/perf /host-dir/${{ matrix.version }}
+            cp /usr/local/bin/perf /host-dir/v${{ matrix.version }}/perf
 
       - uses: actions/upload-artifact@v2
         with:
-          name: perf-${{ matrix.version }}
-          path: perf-${{ matrix.version }}
+          name: v${{ matrix.version }}
+          path: v${{ matrix.version }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,7 +62,7 @@ jobs:
       - name: Generate index
         working-directory: builds
         run: |
-          tree -H "." -L 1 -T "Builds" --noreport --charset utf-8 -I "*.html" > index.html
+          tree -H "." -L 2 -T "Builds" --noreport --charset utf-8 -I "*.html" > index.html
 
       - name: Deploy
         if: github.event_name != 'pull_request'
