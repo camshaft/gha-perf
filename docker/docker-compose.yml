@@ -1,5 +1,29 @@
 version: '3.7'
 services:
+  '5.14':
+    build:
+      args:
+        version: '5.14'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.14
+  '5.13':
+    build:
+      args:
+        version: '5.13'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.13
+  '5.12':
+    build:
+      args:
+        version: '5.12'
+        ubuntu: '20.04'
+      context: ./
+      dockerfile: ./Dockerfile
+    image: camshaft/gha-perf:5.12
   '5.11':
     build:
       args:
