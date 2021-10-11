@@ -4,7 +4,7 @@ services:
     build:
       args:
         version: '5.14'
-        ubuntu: '21.10'
+        ubuntu: '20.04'
       context: ./
       dockerfile: ./Dockerfile
     image: camshaft/gha-perf:5.14
@@ -12,7 +12,7 @@ services:
     build:
       args:
         version: '5.13'
-        ubuntu: '21.10'
+        ubuntu: '20.04'
       context: ./
       dockerfile: ./Dockerfile
     image: camshaft/gha-perf:5.13
@@ -20,7 +20,7 @@ services:
     build:
       args:
         version: '5.12'
-        ubuntu: '21.10'
+        ubuntu: '20.04'
       context: ./
       dockerfile: ./Dockerfile
     image: camshaft/gha-perf:5.12
