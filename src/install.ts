@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as tc from '@actions/tool-cache'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
 export async function install(version: string): Promise<string> {
   if (version === 'native') {
