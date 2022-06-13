@@ -38,6 +38,7 @@ RUN \
   set -e; \
   /usr/local/bin/perf version --build-options; \
   check() { \
+    echo "checking $1"; \
     /usr/local/bin/perf version --build-options \
     | grep "[[:space:]]$1:" \
     | grep on > /dev/null; \
